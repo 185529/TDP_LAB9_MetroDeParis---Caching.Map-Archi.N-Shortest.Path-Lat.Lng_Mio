@@ -1,0 +1,35 @@
+ORM:
+
+- Creo una classe bean per ogni tabella presente nel database
+- Ogni classe ha tanti attributi quanti sono i campi (interessanti) della tabella
+- Getter/Setter, hashCode/equals, toString
+- Un costruttore completo per loading dal database
+- Un costruttore ridotto con sola chiave primaria per caching
+
+- La tabella che mette in relazione due classi è mappata con la chiave primaria e con
+  gli oggetti delle due classi messe in relazione, costruiti con la sola chiave primaria
+  (con il costruttore ridotto), e con solo il costruttore completo
+  
+CACHING:
+
+- Il mapping delle tabelle principali viene eseguito dal dao usando HashMap come struttura dati
+  e la chiave primaria del database come chiave per la mappa
+- Il mapping della relazione è eseguito passando le mappe dei due oggetti e ritornando una lista
+  di oggetti contenenti i riferimenti agli oggetti principali, non oggetti nuovi ed identici
+  
+GRAFI:
+
+- Per grafi (pesati?) estendo il DefaultWeightedEdge aggiungendo come attributo la linea a cui
+  è riferito il collegamento (per poterne poi calcolare il peso)
+- Gli archi vengono creati ciclando sui collegamenti e non sui vertici e settando un arco tra i
+  due nodi le cui info sono contenute nel collegamento stesso (complessità N invece di N*N)
+- Dopo averlo creato, setto il peso dell'arco calcolandolo a partire dall'attributo che ho aggiunto
+
+CAMMINI MINIMI:
+
+- Nel caso di SS (SingleS Source), creo un oggetto DijkstraShortestPath passandogli come parametri il
+  grafo, la stazione di partenza e quella di arrivo
+- Acquisisco la lista degli archi e la lunghezza del percorso
+- Ciclando la lista degli archi, costruisco una lista dei nodi attraversati con getEdgeTarget()
+
+END
